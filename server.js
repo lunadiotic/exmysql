@@ -34,6 +34,9 @@ app.get("/", (req, res) => {
     });
 });
 
+// Post Routes
+require("./routes/post.routes")(app);
+
 // Set PORT,listen for requests
 const PORT = process.env.PORT || 8080;
 
