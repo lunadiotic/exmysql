@@ -86,7 +86,25 @@ exports.update = (req, res) => {
 
 // Delete a Post with the specified id in the request
 exports.delete = (req, res) => {
+    const id = req.params.id;
 
+    Post.destroy({
+        where: { id: id }
+    }).then((result) => {
+       if (result == 1) {
+           res.send({
+               message: "Tutorial was deleted successfully!"
+           });
+       } else {
+            res.send({
+                message: `Cannot delete Tutorial with id=${id}. Maybe Post was not found!`
+            });
+       }
+    }).catch((err) => {
+        res.status(500).send({
+            message: "Could not delete Tutorial with id=" + id
+        });
+    });
 };
 
 // Delete all Posts from the database.
