@@ -109,7 +109,19 @@ exports.delete = (req, res) => {
 
 // Delete all Posts from the database.
 exports.deleteAll = (req, res) => {
-
+    Post.destroy({
+        where: {},
+        truncate: false
+    }).then((result) => {
+        res.send({
+            message: `${result} Posts were deleted successfully!`
+        });
+    }).catch((err) => {
+        res.status(500).send({
+            message: 
+                err.message || "Some error occurred while removing all posts."
+        });
+    });
 };
 
 // Find all published Posts
