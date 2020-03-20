@@ -126,5 +126,14 @@ exports.deleteAll = (req, res) => {
 
 // Find all published Posts
 exports.findAllPublished = (req, res) => {
-
+    Post.findAll({
+        where: { published: true }
+    }).then((result) => {
+        res.send(result)
+    }).catch((err) => {
+        res.status(500).send({
+            message: 
+                err.message || "Some error occured while retrieving tutorials."
+        });
+    });
 };
